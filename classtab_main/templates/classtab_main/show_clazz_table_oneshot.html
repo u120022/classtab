@@ -1,0 +1,30 @@
+<style>
+	table { border-collapse: collapse; }
+	td { border: 1px solid black; padding: .25rem }
+</style>
+
+<table>
+	<thead>
+		<tr>
+			<td>時間</td>
+			<td>月曜日</td>
+			<td>火曜日</td>
+			<td>水曜日</td>
+			<td>木曜日</td>
+			<td>金曜日</td>
+			<td>土曜日</td>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% for clazz_row in clazz_table_transposed %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+
+				{% for clazz in clazz_row %}
+					<td>{{ clazz.displayName }}</td>
+				{% endfor %}
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
