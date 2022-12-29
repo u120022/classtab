@@ -1,0 +1,15 @@
+<form action="{% url "show_info_list_oneshot" %}" method="post">
+	{% csrf_token %}
+
+	<div>
+		<label for="username">ユーザ名</label>
+		<input type="text" name="username" id="username">
+	</div>
+
+	<div>
+		<label for="password">パスワード</label>
+		<input type="password" name="password" id="password">
+	</div>
+
+	<input type="submit">
+</form>

@@ -1,0 +1,22 @@
+<style>
+	table { border-collapse: collapse; }
+	td { border: 1px solid black; padding: .25rem }
+</style>
+
+<table>
+	<thead>
+		<tr>
+			<td>ID</td>
+			<td>名前</td>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% for info in info_list %}
+			<tr>
+				<td>{{ info.id }}</td>
+				<td>{{ info.displayName }}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
