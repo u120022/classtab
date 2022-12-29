@@ -1,5 +1,7 @@
 from django.http import HttpRequest, HttpResponse
+from django.template import loader
 
 
 def index(req: HttpRequest):
-    return HttpResponse(b"Hello,world! I love python!")
+    template = loader.get_template("classtab_main/index.html")
+    return HttpResponse(template.render(request=req))
