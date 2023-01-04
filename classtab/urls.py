@@ -18,5 +18,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path("", include("classtab_main.urls")),
+    path("oneshot/", include("oneshot.urls")),
     path("admin/", admin.site.urls),
 ]

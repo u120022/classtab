@@ -3,4 +3,4 @@ from django.shortcuts import render
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    return render(request, "classtab_main/index.html", {})
+    return render(request, "oneshot/index.html", {})
