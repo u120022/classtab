@@ -1,6 +1,8 @@
 from django.http import HttpRequest, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render
-from webclass_parser import Info, InfoList, auth, parse_info_list
+from webclass_parser import auth, parse_info_list
+
+from oneshot.dtos.info_list import from_info_list
 
 
 # ユーザ情報の入力フォーム用ページ
@@ -28,22 +30,8 @@ def show(request: HttpRequest) -> HttpResponse:
         return HttpResponseBadRequest("データの取得に失敗しました。")
 
     # 表示用にデータの形式を変更
-    info_list_view_model = from_info_list(info_list)
+    info_list_dto = from_info_list(info_list)
 
-    context = {"info_list": info_list_view_model}
+    context = {"info_list": info_list_dto}
 
     return render(request, "oneshot/show_info_list.html", context)
-
-
-# 表示用のデータの形式
-InfoListViewModel = list[Info | None]
-
-# 表示用のデータの形式へ変更
-def from_info_list(info_list: InfoList) -> InfoListViewModel:
-    count = info_list.count
-
-    vm: InfoListViewModel = [None for _ in range(count)]
-    for i in range(count):
-        vm[i] = info_list.get(i)
-
-    return vm

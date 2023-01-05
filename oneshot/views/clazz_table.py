@@ -1,6 +1,8 @@
 from django.http import HttpRequest, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render
-from webclass_parser import Clazz, ClazzTable, auth, parse_clazz_table
+from webclass_parser import auth, parse_clazz_table
+
+from oneshot.dtos.clazz_table import from_clazz_table
 
 
 # ユーザ情報の入力フォーム用ページ
@@ -28,24 +30,8 @@ def show(request: HttpRequest) -> HttpResponse:
         return HttpResponseBadRequest("データの取得に失敗しました。")
 
     # 表示用にデータの形式を変更
-    clazz_table_view_model = from_clazz_table(clazz_table)
+    clazz_table_dto = from_clazz_table(clazz_table)
 
-    context = {"clazz_table": clazz_table_view_model}
+    context = {"clazz_table": clazz_table_dto}
 
     return render(request, "oneshot/show_clazz_table.html", context)
-
-
-# 表示用のデータの形式
-ClassTableViewModel = list[list[Clazz | None]]
-
-# 表示用のデータの形式へ変更
-def from_clazz_table(clazz_table: ClazzTable) -> ClassTableViewModel:
-    rows = clazz_table.row_count
-    cols = clazz_table.col_count
-
-    vm: ClassTableViewModel = [[None for _ in range(cols)] for _ in range(rows)]
-    for row in range(rows):
-        for col in range(cols):
-            vm[row][col] = clazz_table.get(col, row)
-
-    return vm
