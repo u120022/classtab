@@ -1,4 +1,4 @@
-from webclass_parser import Clazz, ClazzTable
+from webclass_parser.models import Clazz, ClazzTable
 
 # 表示用のデータの形式
 ClazzTableDto = list[list[Clazz | None]]
